@@ -1,0 +1,26 @@
+package com.service1;
+
+import com.dao1.EmployeeeDao;
+
+public class EmployeeeService {
+	public void insertData() throws Exception {
+		EmployeeeDao dao=new EmployeeeDao();
+		dao.insertData();
+	}
+	public void updateData() throws Exception {
+		EmployeeeDao dao=new EmployeeeDao();
+		dao.updateData();
+	}
+	public void deleteData() throws Exception {
+		EmployeeeDao dao=new EmployeeeDao();
+		dao.deleteData();
+	}
+	public void getSingleData() throws Exception {
+		EmployeeeDao dao=new EmployeeeDao();
+		dao.getSingleData();
+	}
+	public void getAlleData() throws Exception {
+		EmployeeeDao dao=new EmployeeeDao();
+		dao.getAllData();
+	}
+}
