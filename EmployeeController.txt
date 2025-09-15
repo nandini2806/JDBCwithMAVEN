@@ -1,0 +1,17 @@
+package com.controller;
+
+import com.service.EmployeeService;
+
+public class EmployeeController {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		EmployeeService ser=new EmployeeService();
+		ser.insertData();
+		ser.deleteData();
+		ser.getSingleData();
+		ser.getAllData();
+		ser.updateData();
+	}
+
+}
