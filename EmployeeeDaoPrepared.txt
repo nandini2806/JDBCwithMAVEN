@@ -1,0 +1,80 @@
+package com.dao1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+   public class EmployeeeDao {
+	public Connection connect() throws Exception{
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection c=DriverManager.getConnection("jdbc:mysql://localhost:33061/employee","root","Nandini@2806");
+	return c;
+    }
+	
+	public void insertData() throws Exception {
+		Connection c=connect();
+		PreparedStatement pst=c.prepareStatement("insert into empData(id,eName,eCity,salary)values(?,?,?,?)");
+		pst.setInt(1, 102);
+		pst.setString(2, "Ram");
+		pst.setString(3, "Latur");
+		pst.setInt(4, 45000);
+		int a=pst.executeUpdate();
+		if(a>0) {
+			System.out.println("Inserted");
+		}else {
+			System.out.println("Not Inserted");
+		}
+	}
+	public void updateData() throws Exception {
+		Connection c=connect();
+		PreparedStatement pst=c.prepareStatement("update empData set salary=? where id=?");
+		pst.setInt(1, 50000);
+		pst.setInt(2, 101);
+		int a=pst.executeUpdate();
+	    if(a>0) {
+	    	System.out.println("Data Updated");
+	    }else {
+	    	System.out.println("Data is not Updated");
+	    }
+	 }
+	
+	public void deleteData() throws Exception {
+		Connection c=connect();
+		PreparedStatement pst=c.prepareStatement("delete from employee where id=?");
+		pst.setInt(1, 102);
+		int a=pst.executeUpdate();
+		if(a>0) {
+			System.out.println("Data Deleted");
+	    }else {
+	    	System.out.println("Data is not Deleted");
+	    }
+   }
+	public void getSingleData() throws Exception {
+		Connection c=connect();
+		PreparedStatement pst=c.prepareStatement("Select * from empData where id=?");
+		pst.setInt(1, 101);
+	    ResultSet rs=pst.executeQuery();
+	    if(rs.next()) {
+	    	int id=rs.getInt("id");
+	    	String Name=rs.getString("eName");
+	    	String city=rs.getString("eCity");
+	    	int salary=rs.getInt("salary");
+	    	System.out.println("Employeee Name "+Name+" Employee Id "+id+" Employee Salary "+salary+" Employee city "+city);	
+	    }
+	}
+	public void getAllData() throws Exception {
+		Connection c=connect();
+		PreparedStatement pst=c.prepareStatement("Select * from empData");
+	    ResultSet rs=pst.executeQuery();
+	    while(true) {
+	    if(rs.next()) {
+	    	int id=rs.getInt("id");
+	    	String Name=rs.getString("empName");
+	    	String city=rs.getString("empCity");
+	    	int salary=rs.getInt("empSalary");
+	    	System.out.println("Employeee Name "+Name+" Employee Id "+id+" Employee City "+city+" Salary "+salary);	
+	    }
+	}
+}
+}
