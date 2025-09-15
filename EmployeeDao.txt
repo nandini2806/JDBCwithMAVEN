@@ -1,0 +1,75 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class EmployeeDao {
+
+	public Connection connect() throws Exception{
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection c=DriverManager.getConnection("jdbc:mysql://localhost:33061/employee","root","Nandini@2806");
+	return c;
+    }
+	
+	public void insertData() throws Exception {
+		Connection c=connect();
+		Statement st=c.createStatement();
+	    int a=st.executeUpdate("insert into employee value(121,'Ram','Pune',100000)");
+	    if(a>0) {
+	    	System.out.println("Data Inserted");
+	    }else {
+	    	System.out.println("Data is not Inserted");
+	    }
+	 }
+	public void updateData() throws Exception {
+		Connection c=connect();
+		Statement st=c.createStatement();
+	    int a=st.executeUpdate("update employee set empsalary=20000 where id=121");
+	    if(a>0) {
+	    	System.out.println("Data Updated");
+	    }else {
+	    	System.out.println("Data is not Updated");
+	    }
+	 }
+	
+	public void deleteData() throws Exception {
+		Connection c=connect();
+		Statement st=c.createStatement();
+		int a=st.executeUpdate("delete from employee where id=122");
+		if(a>0) {
+			System.out.println("Data Deleted");
+	    }else {
+	    	System.out.println("Data is not Deleted");
+	    }
+
+		}
+		
+	public void getSingleData() throws Exception {
+		Connection c=connect();
+		Statement st=c.createStatement();
+	    ResultSet rs=st.executeQuery("Select * from employee where id=121");
+	    if(rs.next()) {
+	    	int id=rs.getInt("id");
+	    	String Name=rs.getString("empName");
+	    	int salary=rs.getInt("empSalary");
+	    	System.out.println("Employeee Name "+Name+" Employee Id "+id+" Employee Salary "+salary);	
+	    }
+	}
+	public void getAllData() throws Exception {
+		Connection c=connect();
+		Statement st=c.createStatement();
+	    ResultSet rs=st.executeQuery("Select * from employee");
+	    while(true) {
+	    if(rs.next()) {
+	    	int id=rs.getInt("id");
+	    	String Name=rs.getString("empName");
+	    	String city=rs.getString("empCity");
+	    	int salary=rs.getInt("empSalary");
+	    	System.out.println("Employeee Name "+Name+" Employee Id "+id+" Employee City "+city+" Salary "+salary);	
+	    }
+	}
+	}
+	}
+	
